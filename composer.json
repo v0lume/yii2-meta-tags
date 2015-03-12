@@ -1,0 +1,21 @@
+{
+  "name": "v0lume/yii2-meta-tags",
+  "description": "DB based model meta data for SEO",
+  "type": "yii2-extension",
+  "keywords": ["yii2","extension","meta","meta tags","seo","behavior","active record"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Artem Shmanovsky",
+      "email": "heads@xakep.ru"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "v0lume\\yii2\\metaTags\\": ""
+    }
+  }
+}
