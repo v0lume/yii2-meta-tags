@@ -10,6 +10,7 @@ namespace v0lume\yii2\metaTags\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use v0lume\yii2\metaTags\MetaTags;
 
 class MetaTag extends \yii\db\ActiveRecord
 {
@@ -41,9 +42,9 @@ class MetaTag extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'title' => 'Заголовок',
-            'keywords' => 'Ключевые слова',
-            'description' => 'Описание',
+            'title' => MetaTags::t('messages', 'model_title'),
+            'keywords' => MetaTags::t('messages', 'model_keywords'),
+            'description' => MetaTags::t('messages', 'model_description'),
         ];
     }
 

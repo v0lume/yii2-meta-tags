@@ -26,11 +26,26 @@ class MetaTags extends Widget
     public function init()
     {
         parent::init();
+        self::registerTranslations();
 
         if (!$this->model->getBehavior($this->behaviorName))
         {
-            throw new Exception("Модель должна иметь поведение {$this->behaviorName}", 500);
+            throw new Exception(self::t('messages', 'widget_behavior_exception {behaviorName}', ['behaviorName' => $this->behaviorName]), 500);
         }
+    }
+
+
+    public static function registerTranslations()
+    {
+        $i18n = Yii::$app->i18n;
+        $i18n->translations['metaTags/*'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'sourceLanguage' => 'sys',
+            'basePath' => '@vendor/v0lume/yii2-meta-tags/messages',
+            'fileMap' => [
+                'metaTags/messages' => 'messages.php',
+            ],
+        ];
     }
 
 
@@ -53,5 +68,13 @@ class MetaTags extends Widget
             'model' => $model,
             'form' => $this->form,
         ]);
+    }
+
+
+    public static function t($category, $message, $params = [], $language = null)
+    {
+        self::registerTranslations();
+
+        return Yii::t('metaTags/' . $category, $message, $params, $language);
     }
 }
