@@ -12,13 +12,12 @@ use Yii;
 use yii\base\Widget;
 use yii\base\Exception;
 
+use v0lume\yii2\metaTags\MetaTagsComponent;
 use v0lume\yii2\metaTags\models\MetaTag;
 
 
 class MetaTags extends Widget
 {
-    public $behaviorName = 'MetaTag';
-
     public $model;
     public $form;
 
@@ -28,9 +27,9 @@ class MetaTags extends Widget
         parent::init();
         self::registerTranslations();
 
-        if (!$this->model->getBehavior($this->behaviorName))
+        if (!$this->model->getBehavior(MetaTagsComponent::$behaviorName))
         {
-            throw new Exception(self::t('messages', 'widget_behavior_exception {behaviorName}', ['behaviorName' => $this->behaviorName]), 500);
+            throw new Exception(self::t('messages', 'widget_behavior_exception {behaviorName}', ['behaviorName' => MetaTagsComponent::$behaviorName]), 500);
         }
     }
 

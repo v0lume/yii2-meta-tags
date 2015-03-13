@@ -24,7 +24,7 @@ to the require section of your `composer.json` file.
 Usage
 ------------
 
-Add MetaTagBehavior to your model, and configure it.
+Add `MetaTagBehavior` to your model, and configure it.
 
 ```php
 
@@ -38,7 +38,7 @@ public function behaviors()
 }
 ```
 
-Add MetaTags somewhere in you application, for example in editing form.
+Add `MetaTags` somewhere in you application, for example in editing form.
 
 ```php
 echo MetaTags::widget([
@@ -56,6 +56,7 @@ echo $model->getBehavior('MetaTag')->description;
 ```
 
 Or, by manually find model:
+
 ```php
 use v0lume\yii2\metaTags\model\MetaTag;
 
@@ -72,3 +73,35 @@ echo $meta_tag->title;
 echo $meta_tag->keywords;
 echo $meta_tag->description;
 ```
+
+Auto registration meta tags
+------------
+You can use `MetaTagsComponent` to perform auto registration meta tags
+
+Configure `MetaTagsComponent` in `main.php` config:
+
+```php
+
+...
+'components' => [
+    ...
+    'metaTags' => [
+        'class' => 'v0lume\yii2\metaTags\MetaTagsComponent',
+        'generateCsrf' => false,
+        'generateOg' => true,
+    ],
+    ...
+],
+...
+    
+```
+
+And then, in your layouts or views or controller action
+
+```php
+$model = \common\models\Page::findOne(['url' => '/']);
+
+Yii::$app->metaTags->register($model);
+```
+
+If passed $model was attached `MetaTagBehavior`, component will register meta tags for that model. If `MetaTagBehavior` wasn't attached or model not passed, and `generateCsrf` is set to true, component will generate only csrf meta tags.
