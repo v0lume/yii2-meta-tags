@@ -1,6 +1,7 @@
 # yii2-meta-tags
 DB based model meta data for SEO
 
+![screenshot](https://cloud.githubusercontent.com/assets/5075100/6626492/fc4a689e-c907-11e4-85aa-af653a455ad0.jpg)
 
 Installation
 ------------
