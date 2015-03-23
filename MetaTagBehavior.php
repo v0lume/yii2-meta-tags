@@ -65,6 +65,9 @@ class MetaTagBehavior extends Behavior
             'model'  => (new \ReflectionClass($this->owner))->getShortName()
         ]);
 
+        if($model == null)
+            $model = new MetaTag();
+
         $this->_model = $model;
 
         return $model;
