@@ -1,7 +1,5 @@
 <?php
 
-namespace v0lume\yii2\metaTags\migrations;
-
 use yii\db\Schema;
 use yii\db\Migration;
 
