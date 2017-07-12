@@ -13,6 +13,7 @@ use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
 use v0lume\yii2\metaTags\models\MetaTag;
+use yii\web\Request;
 
 class MetaTagBehavior extends Behavior
 {
@@ -31,20 +32,22 @@ class MetaTagBehavior extends Behavior
 
     public function afterSave($event)
     {
-        $attributes = Yii::$app->request->post('MetaTag', Yii::$app->request->get('MetaTag', null) );
+        if(Yii::$app->request instanceof Request){
+            $attributes = Yii::$app->request->post('MetaTag', Yii::$app->request->get('MetaTag', null) );
 
-        if($attributes)
-        {
-            $model = $this->getModel();
+            if($attributes)
+            {
+                $model = $this->getModel();
 
-            if(!isset($model))
-                $model = new MetaTag();
+                if(!isset($model))
+                    $model = new MetaTag();
 
-            $attributes['model_id'] = $this->owner->id;
-            $attributes['model']  = (new \ReflectionClass($this->owner))->getShortName();
+                $attributes['model_id'] = $this->owner->id;
+                $attributes['model']  = (new \ReflectionClass($this->owner))->getShortName();
 
-            $model->attributes = $attributes;
-            $model->save();
+                $model->attributes = $attributes;
+                $model->save();
+            }
         }
     }
 
